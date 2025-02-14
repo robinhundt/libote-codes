@@ -65,7 +65,7 @@ unsafe impl ExternType for Block {
 mod ffi {
 
     unsafe extern "C++" {
-        include!("libote/src/SilentEncoderBridge.h");
+        include!("libote-codes/src/SilentEncoderBridge.h");
 
         #[namespace = "osuCrypto"]
         #[cxx_name = "block"]
