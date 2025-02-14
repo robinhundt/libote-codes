@@ -24,7 +24,7 @@ fn main() {
     )
     .unwrap();
 
-    let (sse2_enabled, aes_enabled, avx_enabled, pclmul_enabled) =
+    let (sse2_enabled, aes_enabled, avx2_enabled, pclmul_enabled) =
         if &env::var("CARGO_CFG_TARGET_ARCH").unwrap_or_default() != "x86_64" {
             (false, false, false, false)
         } else {
@@ -64,6 +64,7 @@ fn main() {
         build
             .define("ENABLE_SSE", None)
             .define("OC_ENABLE_SSE2", None);
+        build.flag("-msse2");
 
         if !pclmul_enabled {
             panic!("if targe_feature = sse2 is enabled, pclmulqdq must be enabled as well")
@@ -72,12 +73,14 @@ fn main() {
         build.flag("-mpclmul");
     }
 
-    if avx_enabled {
+    if avx2_enabled {
         build.define("ENABLE_AVX", None);
+        build.flag("-mavx2");
     }
 
     if aes_enabled {
         build.define("OC_ENABLE_AESNI", None);
+        build.flag("-maes");
     } else {
         build.define("OC_ENABLE_PORTABLE_AES", None);
     }
