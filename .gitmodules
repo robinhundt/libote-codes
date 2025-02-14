@@ -1,0 +1,6 @@
+[submodule "libOTe"]
+	path = libOTe
+	url = git@github.com:robinhundt/libOTe.git
+[submodule "thirdparty/libdivide"]
+	path = thirdparty/libdivide
+	url = git@github.com:ridiculousfish/libdivide.git
